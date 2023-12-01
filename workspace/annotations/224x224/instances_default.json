@@ -1,0 +1,248 @@
+{
+  "licenses": [
+    {
+      "name": "",
+      "id": 0,
+      "url": ""
+    }
+  ],
+  "info": {
+    "contributor": "",
+    "date_created": "",
+    "description": "",
+    "url": "",
+    "version": "",
+    "year": ""
+  },
+  "categories": [
+    {
+      "id": 1,
+      "name": "Ausbildung",
+      "supercategory": ""
+    },
+    {
+      "id": 2,
+      "name": "Anschrift",
+      "supercategory": ""
+    },
+    {
+      "id": 3,
+      "name": "AngabenZuMeinerPerson",
+      "supercategory": ""
+    }
+  ],
+  "images": [
+    {
+      "id": 1,
+      "width": 224,
+      "height": 224,
+      "file_name": "BafoegAntragSeite1Bild1.jpeg",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 2,
+      "width": 224,
+      "height": 224,
+      "file_name": "BafoegAntragSeite1Bild2.jpeg",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 3,
+      "width": 224,
+      "height": 224,
+      "file_name": "BafoegAntragSeite1Bild3.jpeg",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    }
+  ],
+  "annotations": [
+    {
+      "id": 1,
+      "image_id": 1,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 3662.928,
+      "bbox": [
+        39.93,
+        79.38,
+        111.2,
+        32.94
+      ],
+      "iscrowd": 0,
+      "attributes": {
+        "occluded": false,
+        "rotation": 0.0,
+        "track_id": 0,
+        "keyframe": true
+      }
+    },
+    {
+      "id": 2,
+      "image_id": 1,
+      "category_id": 2,
+      "segmentation": [],
+      "area": 1764.7757000000001,
+      "bbox": [
+        39.0,
+        146.28,
+        113.93,
+        15.49
+      ],
+      "iscrowd": 0,
+      "attributes": {
+        "occluded": false,
+        "rotation": 0.0,
+        "track_id": 1,
+        "keyframe": true
+      }
+    },
+    {
+      "id": 3,
+      "image_id": 1,
+      "category_id": 3,
+      "segmentation": [],
+      "area": 3733.1926000000003,
+      "bbox": [
+        40.0,
+        112.42,
+        111.14,
+        33.59
+      ],
+      "iscrowd": 0,
+      "attributes": {
+        "occluded": false,
+        "rotation": 0.0,
+        "track_id": 2,
+        "keyframe": true
+      }
+    },
+    {
+      "id": 4,
+      "image_id": 2,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 3862.2216,
+      "bbox": [
+        40.13,
+        69.71,
+        114.64,
+        33.69
+      ],
+      "iscrowd": 0,
+      "attributes": {
+        "occluded": false,
+        "rotation": 0.0,
+        "track_id": 0,
+        "keyframe": true
+      }
+    },
+    {
+      "id": 5,
+      "image_id": 2,
+      "category_id": 2,
+      "segmentation": [],
+      "area": 1714.6108,
+      "bbox": [
+        39.88,
+        136.46,
+        114.46,
+        14.98
+      ],
+      "iscrowd": 0,
+      "attributes": {
+        "occluded": false,
+        "rotation": 0.0,
+        "track_id": 1,
+        "keyframe": true
+      }
+    },
+    {
+      "id": 6,
+      "image_id": 2,
+      "category_id": 3,
+      "segmentation": [],
+      "area": 3695.9875,
+      "bbox": [
+        40.27,
+        103.66,
+        114.25,
+        32.35
+      ],
+      "iscrowd": 0,
+      "attributes": {
+        "occluded": false,
+        "rotation": 0.0,
+        "track_id": 2,
+        "keyframe": true
+      }
+    },
+    {
+      "id": 7,
+      "image_id": 3,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 3858.2971,
+      "bbox": [
+        29.0,
+        71.54,
+        115.07,
+        33.53
+      ],
+      "iscrowd": 0,
+      "attributes": {
+        "occluded": false,
+        "rotation": 0.0,
+        "track_id": 0,
+        "keyframe": true
+      }
+    },
+    {
+      "id": 8,
+      "image_id": 3,
+      "category_id": 2,
+      "segmentation": [],
+      "area": 1759.9134,
+      "bbox": [
+        29.0,
+        139.37,
+        115.86,
+        15.19
+      ],
+      "iscrowd": 0,
+      "attributes": {
+        "occluded": false,
+        "rotation": 0.0,
+        "track_id": 1,
+        "keyframe": true
+      }
+    },
+    {
+      "id": 9,
+      "image_id": 3,
+      "category_id": 3,
+      "segmentation": [],
+      "area": 3839.5800000000004,
+      "bbox": [
+        29.08,
+        105.56,
+        115.65,
+        33.2
+      ],
+      "iscrowd": 0,
+      "attributes": {
+        "occluded": false,
+        "rotation": 0.0,
+        "track_id": 2,
+        "keyframe": true
+      }
+    }
+  ]
+}
