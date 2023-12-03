@@ -1246,27 +1246,6 @@
       }
     },
     {
-      "id": 42,
-      "image_id": 1,
-      "category_id": 10,
-      "segmentation": [],
-      "area": 10556.54819999998,
-      "bbox": [
-        274.32,
-        620.19,
-        229.59,
-        45.98
-      ],
-      "iscrowd": 0,
-      "attributes": {
-        "Foerderungsnummer": 1.0,
-        "occluded": false,
-        "rotation": 0.0,
-        "track_id": 37,
-        "keyframe": true
-      }
-    },
-    {
       "id": 43,
       "image_id": 2,
       "category_id": 11,
