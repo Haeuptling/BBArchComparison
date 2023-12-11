@@ -1,2 +1,3 @@
 yolov8_backbone.keras
 workspace/images/plots/
+workspace/models/bbox/
