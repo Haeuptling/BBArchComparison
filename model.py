@@ -2,6 +2,7 @@ import ressize
 import keras_cv
 import tensorflow as tf
 import numpy as np
+import cv2
 from keras.preprocessing import image as keras_image
 
 from config import LEARNING_RATE,GLOBAL_CLIPNORM,NUM_CLASSES_ALL,SUB_BBOX_DETECTOR_MODEL,BBOX_PATH,MAIN_BBOX_DETECTOR_MODEL, class_ids, main_class_ids,sub_class_ids
@@ -9,12 +10,10 @@ from config import LEARNING_RATE,GLOBAL_CLIPNORM,NUM_CLASSES_ALL,SUB_BBOX_DETECT
 def predict_image(image_path, model):
     image = get_image_as_array(image_path)
     predictions = model.predict(image)
-    print(predictions)
     best_bboxes = extract_boxes(predictions)
     predicted_class_ids = list(best_bboxes.keys())
     predicted_bounding_boxes = list(best_bboxes.values())
     predicted_ids_names = []
-    
     #TODO in universell aendern
     for id in predicted_class_ids:
         predicted_ids_names.append(get_class_mapping(MAIN_BBOX_DETECTOR_MODEL)[id])
@@ -53,9 +52,9 @@ def define_optimizer():
     )
     return optimizer
 
-def define_backbone(backbone):
+def define_backbone(pretrained_model):
     backbone = keras_cv.models.YOLOV8Backbone.from_preset(
-        "yolo_v8_xs_backbone_coco",
+        pretrained_model,
          load_weights=True 
     )
     return backbone
@@ -95,9 +94,6 @@ def extract_boxes(predictions_on_image):
 
 #TODO get real height width 
 def get_image_as_array(image_path):
-    img = keras_image.load_img(image_path, target_size=(640, 640))
-    img_array = keras_image.img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0)
-    img_array /= 255.0
-
-    return img_array
+    image = cv2.imread(image_path)
+    image = np.expand_dims(image, axis=0)  
+    return image
