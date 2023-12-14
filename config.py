@@ -6,6 +6,9 @@ BBOX_PATH = MODEL_PATH+'/bbox'
 MAIN_BBOX_DETECTOR_MODEL = '/main_bbox_detector_model.h5'
 SUB_BBOX_DETECTOR_MODEL = '/sub_bbox_detector_model.h5'
 
+YOLO_HEIGHT = 640
+YOLO_WIDTH = 640
+
 SPLIT_RATIO = 0.2
 BATCH_SIZE = 2
 LEARNING_RATE = 0.001
