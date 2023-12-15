@@ -6,14 +6,15 @@ import cv2
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from keras.preprocessing import image as keras_image
-from ressize import resize_image,get_width_height_shape, scale_bounding_box
-from config import LEARNING_RATE,GLOBAL_CLIPNORM,NUM_CLASSES_ALL,SUB_BBOX_DETECTOR_MODEL,BBOX_PATH,MAIN_BBOX_DETECTOR_MODEL, class_ids, main_class_ids,sub_class_ids
+from ressize import resize_image, get_width_height_shape, scale_bounding_box
+from config import LEARNING_RATE, GLOBAL_CLIPNORM, NUM_CLASSES_ALL, SUB_BBOX_DETECTOR_MODEL, BBOX_PATH, \
+    MAIN_BBOX_DETECTOR_MODEL, class_ids, main_class_ids, sub_class_ids
 
 
 def predict_image(image, model):
     ratios = get_width_height_shape(image)
     resized_image = resize_image(image)
-    predictions = model.predict(resized_image)   
+    predictions = model.predict(resized_image)
     boxes = predictions['boxes']
     confidence = predictions['confidence']
     classes = predictions['classes']
@@ -22,38 +23,37 @@ def predict_image(image, model):
 
 def define_model(num_classes):
     model = keras_cv.models.YOLOV8Detector(
-    num_classes=num_classes, 
-    bounding_box_format="xyxy",
-    backbone=define_backbone("yolo_v8_xs_backbone_coco"),
-    fpn_depth=1,
+        num_classes=num_classes,
+        bounding_box_format="xyxy",
+        backbone=define_backbone("yolo_v8_xs_backbone_coco"),
+        fpn_depth=1,
     )
     return model
 
 def compile_model(model):
     model.compile(
-    optimizer=define_optimizer(), 
-    classification_loss="binary_crossentropy", 
-    box_loss="ciou"
+        optimizer=define_optimizer(),
+        classification_loss="binary_crossentropy",
+        box_loss="ciou"
     )
 
-def load_weight_model(model_path):
-    base_model = define_model(41)#(len(get_class_mapping(model_path)[0]))
+def load_weight_model(model_path, num_classes):
+    base_model = define_model(num_classes)
     compile_model(base_model)
     base_model.load_weights(model_path)
-    return  base_model
-
+    return base_model
 
 def define_optimizer():
     optimizer = tf.keras.optimizers.Adam(
         learning_rate=LEARNING_RATE,
-        global_clipnorm=GLOBAL_CLIPNORM, 
+        global_clipnorm=GLOBAL_CLIPNORM,
     )
     return optimizer
 
 def define_backbone(pretrained_model):
     backbone = keras_cv.models.YOLOV8Backbone.from_preset(
         pretrained_model,
-        load_weights=True 
+        load_weights=True
     )
     return backbone
 
@@ -92,27 +92,28 @@ def extract_boxes(predictions_on_image):
 
 def get_image_as_array(image_path):
     image = cv2.imread(image_path)
-    image = np.expand_dims(image, axis=0)  
+    image = np.expand_dims(image, axis=0)
     return image
 
-def non_maximum_supression(boxes,confidence,classes):
+def non_maximum_supression(boxes, confidence, classes):
     selected_indices = tf.image.non_max_suppression(
-    boxes, confidence, max_output_size, iou_threshold)
+        boxes, confidence, max_output_size, iou_threshold)
     selected_boxes = tf.gather(boxes, selected_indices)
 
     return selected_boxes
 
-def show_image(image, boxes,confidence,classes):
+def show_image(image, boxes, confidence, classes):
     image = cv2.imread(image)
 
-    #image_with_boxes = np.copy(image)
+    # image_with_boxes = np.copy(image)
     fig, ax = plt.subplots(1)
     ax.imshow(image)
     for box, conf, cls in zip(boxes[0], confidence[0], classes[0]):
-        if conf>0.1:
+        if conf > 0.1:
             xmin, ymin, xmax, ymax = box
             label = f"Class {cls} ({conf:.2f})"
-            rect = patches.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, linewidth=1, edgecolor='r', facecolor='none', label=label)
+            rect = patches.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, linewidth=1, edgecolor='r',
+                                     facecolor='none', label=label)
             ax.add_patch(rect)
 
     plt.legend()
