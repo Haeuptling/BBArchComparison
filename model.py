@@ -13,20 +13,8 @@ from config import LEARNING_RATE,GLOBAL_CLIPNORM,NUM_CLASSES_ALL,SUB_BBOX_DETECT
 def predict_image(image, model):
     ratios = get_width_height_shape(image)
     resized_image = resize_image(image)
-    predictions = model.predict(resized_image)
-    best_bboxes = extract_boxes(predictions)
-    predicted_class_ids = list(best_bboxes.keys())
-    predicted_bounding_boxes = list(best_bboxes.values())
-    predicted_ids_names = []
-    print(predicted_bounding_boxes)
-    predicted_bounding_boxes = scale_bounding_box(predicted_bounding_boxes,ratios[0], ratios[1] )
-    #TODO in universell aendern
-    for id in predicted_class_ids:
-        predicted_ids_names.append(get_class_mapping(MAIN_BBOX_DETECTOR_MODEL)[id])
-
-    print("predicted_class_ids:", predicted_ids_names)
-    print("predicted_bounding_boxes:", predicted_bounding_boxes)    
-    return predicted_bounding_boxes,predicted_ids_names
+    predictions = model.predict(resized_image)   
+    return predictions
 
 def define_model(num_classes):
     model = keras_cv.models.YOLOV8Detector(
@@ -103,14 +91,20 @@ def get_image_as_array(image_path):
     image = np.expand_dims(image, axis=0)  
     return image
 
-def show_image(image, bounding_boxes):
+def show_image(image, predictions):
+    boxes = predictions['boxes']
+    confidence = predictions['confidence']
+    classes = predictions['classes']
     image = cv2.imread(image)
-    image_with_boxes = np.copy(image)
-    fig, ax = plt.subplots(1)
 
-    for box in bounding_boxes:
-        x, y, width, height = box[0], box[1], box[2] - box[0], box[3] - box[1]
-        rect = patches.Rectangle((x, y), width, height, linewidth=2, edgecolor='r', facecolor='none')
+    #image_with_boxes = np.copy(image)
+    fig, ax = plt.subplots(1)
+    ax.imshow(image)
+    for box, conf, cls in zip(boxes[0], confidence[0], classes[0]):
+        xmin, ymin, xmax, ymax = box
+        label = f"Class {cls} ({conf:.2f})"
+        rect = patches.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, linewidth=1, edgecolor='r', facecolor='none', label=label)
         ax.add_patch(rect)
-    ax.imshow(image_with_boxes)
+
+    plt.legend()
     plt.show()
