@@ -14,7 +14,11 @@ def predict_image(image, model):
     ratios = get_width_height_shape(image)
     resized_image = resize_image(image)
     predictions = model.predict(resized_image)   
-    return predictions
+    boxes = predictions['boxes']
+    confidence = predictions['confidence']
+    classes = predictions['classes']
+    print(boxes)
+    return boxes, confidence, classes
 
 def define_model(num_classes):
     model = keras_cv.models.YOLOV8Detector(
@@ -33,7 +37,7 @@ def compile_model(model):
     )
 
 def load_weight_model(model_path):
-    base_model = define_model(2)#len(get_class_mapping(model_path)[0]
+    base_model = define_model(41)#(len(get_class_mapping(model_path)[0]))
     compile_model(base_model)
     base_model.load_weights(model_path)
     return  base_model
@@ -91,10 +95,14 @@ def get_image_as_array(image_path):
     image = np.expand_dims(image, axis=0)  
     return image
 
-def show_image(image, predictions):
-    boxes = predictions['boxes']
-    confidence = predictions['confidence']
-    classes = predictions['classes']
+def non_maximum_supression(boxes,confidence,classes):
+    selected_indices = tf.image.non_max_suppression(
+    boxes, confidence, max_output_size, iou_threshold)
+    selected_boxes = tf.gather(boxes, selected_indices)
+
+    return selected_boxes
+
+def show_image(image, boxes,confidence,classes):
     image = cv2.imread(image)
 
     #image_with_boxes = np.copy(image)
