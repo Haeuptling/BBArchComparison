@@ -101,10 +101,11 @@ def show_image(image, predictions):
     fig, ax = plt.subplots(1)
     ax.imshow(image)
     for box, conf, cls in zip(boxes[0], confidence[0], classes[0]):
-        xmin, ymin, xmax, ymax = box
-        label = f"Class {cls} ({conf:.2f})"
-        rect = patches.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, linewidth=1, edgecolor='r', facecolor='none', label=label)
-        ax.add_patch(rect)
+        if conf>0.1:
+            xmin, ymin, xmax, ymax = box
+            label = f"Class {cls} ({conf:.2f})"
+            rect = patches.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin, linewidth=1, edgecolor='r', facecolor='none', label=label)
+            ax.add_patch(rect)
 
     plt.legend()
     plt.show()
