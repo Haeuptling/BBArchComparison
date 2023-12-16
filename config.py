@@ -47,7 +47,6 @@ class_ids = [
     "Wohnsitz_Hausnummer",
     "Wohnsitz_Adresszusatz",
     "Wohnsitz_Ort",
-    "Wohnsitz_waehrend_Ausbildung",
     "Wohnsitz_waehrend_Ausbildung_Strasse",
     "Wohnsitz_waehrend_Ausbildung_Hausnummer",
     "Wohnsitz_waehrend_Ausbildung_Land",
@@ -58,6 +57,7 @@ class_ids = [
     "Wohnsitz_waehrend_Ausbildung_elternmiete",
     "Wohnsitz_waehrend_Ausbildung_elternwohnung_ja",
     "Wohnsitz_waehrend_Ausbildung_elternmiete_nein",
+    "Wohnsitz_waehrend_Ausbildung",
     "Ausbildung",
     "Person",
     "Wohnsitz"
@@ -91,7 +91,6 @@ sub_class_ids = [
     "Wohnsitz_Hausnummer",
     "Wohnsitz_Adresszusatz",
     "Wohnsitz_Ort",
-    "Wohnsitz_waehrend_Ausbildung",
     "Wohnsitz_waehrend_Ausbildung_Strasse",
     "Wohnsitz_waehrend_Ausbildung_Hausnummer",
     "Wohnsitz_waehrend_Ausbildung_Land",
@@ -104,6 +103,7 @@ sub_class_ids = [
     "Wohnsitz_waehrend_Ausbildung_elternmiete_nein"
 ]
 main_class_ids = [
+    "Wohnsitz_waehrend_Ausbildung",
     "Ausbildung",
     "Person",
     "Wohnsitz"
